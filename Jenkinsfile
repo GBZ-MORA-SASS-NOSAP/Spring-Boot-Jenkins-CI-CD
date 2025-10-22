@@ -12,13 +12,14 @@ pipeline {
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/GBZ-MORA-SASS-NOSAP/Spring-Boot-Jenkins-CI-CD.git'
             }
         }
-       
-         stage('SonarQube Analysis') {
-            def mvn = tool 'Default Maven';
-            withSonarQubeEnv() {
-              sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=GBZ-MORA-SASS-NOSAP_mora-back-api_7c7789f8-23a9-47ad-b812-2e098418a81e -Dsonar.projectName='mora-back-api'"
+        
+        stage('Sonarqube Analysis') {
+            steps {
+                sh ''' mvn sonar:sonar \
+                    -Dsonar.host.url=http://161.132.41.100:9000/ \
+                    -Dsonar.login=squ_07ee9fdc11ad5d229fa448ceb6e09a84a4f1ca17 '''
             }
-          }
+        }
 
         stage('Clean & Package'){
             steps{
