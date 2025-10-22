@@ -9,13 +9,13 @@ pipeline {
     stages {
         stage('Code Checkout') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/GBZ-MORA-SASS-NOSAP/Spring-Boot-Jenkins-CI-CD.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/GBZ-MORA-SASS-NOSAP/mora-back-api.git'
             }
         }
         
         stage('Sonarqube Analysis') {
             steps {
-                sh ''' mvn sonar:sonar \
+                sh ''' mvn clean verify sonar:sonar \
                     -Dsonar.host.url=http://161.132.41.100:9000/ \
                     -Dsonar.login=squ_07ee9fdc11ad5d229fa448ceb6e09a84a4f1ca17 '''
             }
