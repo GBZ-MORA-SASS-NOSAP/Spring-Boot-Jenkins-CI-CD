@@ -9,21 +9,21 @@ pipeline {
     stages {
         stage('Code Checkout') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/AbderrahmaneOd/Spring-Boot-Jenkins-CI-CD'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/GBZ-MORA-SASS-NOSAP/Spring-Boot-Jenkins-CI-CD.git'
             }
         }
         
-        stage('OWASP Dependency Check'){
-            steps{
-                dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'db-check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
+        #stage('OWASP Dependency Check'){
+        #    steps{
+        #        dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'db-check'
+        #        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+        #    }
+        #}
 
         stage('Sonarqube Analysis') {
             steps {
                 sh ''' mvn sonar:sonar \
-                    -Dsonar.host.url=http://localhost:9000/ \
+                    -Dsonar.host.url=http://161.132.41.100:9000/ \
                     -Dsonar.login=squ_9bd7c664e4941bd4e7670a88ed93d68af40b42a3 '''
             }
         }
