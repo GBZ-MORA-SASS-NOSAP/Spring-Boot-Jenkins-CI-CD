@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Code Checkout') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/GBZ-MORA-SASS-NOSAP/mora-back-api.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/GBZ-MORA-SASS-NOSAP/Spring-Boot-Jenkins-CI-CD.git'
             }
         }
         
