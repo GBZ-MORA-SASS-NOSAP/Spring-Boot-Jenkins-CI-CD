@@ -20,13 +20,20 @@ pipeline {
         #    }
         #}
 
-        stage('Sonarqube Analysis') {
-            steps {
-                sh ''' mvn sonar:sonar \
-                    -Dsonar.host.url=http://161.132.41.100:9000/ \
-                    -Dsonar.login=squ_9bd7c664e4941bd4e7670a88ed93d68af40b42a3 '''
+        #stage('Sonarqube Analysis') {
+        #    steps {
+        #        sh ''' mvn sonar:sonar \
+        #            -Dsonar.host.url=http://161.132.41.100:9000/ \
+        #            -Dsonar.login=squ_9bd7c664e4941bd4e7670a88ed93d68af40b42a3 '''
+        #    }
+        #}
+
+         stage('SonarQube Analysis') {
+            def mvn = tool 'Default Maven';
+            withSonarQubeEnv() {
+              sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=GBZ-MORA-SASS-NOSAP_mora-back-api_7c7789f8-23a9-47ad-b812-2e098418a81e -Dsonar.projectName='mora-back-api'"
             }
-        }
+          }
 
         stage('Clean & Package'){
             steps{
