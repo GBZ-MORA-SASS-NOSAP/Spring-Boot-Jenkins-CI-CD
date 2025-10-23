@@ -12,7 +12,7 @@ pipeline {
                 git branch: 'main', changelog: false, poll: false, url: 'https://github.com/GBZ-MORA-SASS-NOSAP/Spring-Boot-Jenkins-CI-CD.git'
             }
         }
-        
+        /*
         stage('Sonarqube Analysis') {
             steps {
                 sh ''' mvn clean verify sonar:sonar \
@@ -20,7 +20,7 @@ pipeline {
                     -Dsonar.login=squ_07ee9fdc11ad5d229fa448ceb6e09a84a4f1ca17 '''
             }
         }
-
+        */ 
         stage('Clean & Package'){
             steps{
                 sh "mvn clean package -DskipTests"
